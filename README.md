@@ -16,17 +16,22 @@ Add the following to `project/plugins.sbt`:
 
 #### Usage
 
-You will need a configuration file. The easiest way to get one is to use the `scalastyleGenerateConfig` command:
+You will need a configuration file. The easiest way to get one is to use the `scalastyleGenerateConfig`
+command (at the command line, NOT inside `sbt`):
 
     $ sbt scalastyleGenerateConfig
 
-This will create a scalastyle-config.xml in the current directory, with the default settings.
-Then, you can check your code with the scalastyle command (at the command line, NOT inside `sbt`):
+This will create a `scalastyle-config.xml` in the current directory, with the default settings.
+
+Then you can check your code with the `scalastyle` command (at the command line, NOT inside `sbt`):
 
     $ sbt scalastyle
 
 This produces a list of errors on the console, as well as an XML result file
 `target/scalastyle-result.xml` (CheckStyle compatible format).
+
+Some of the warnings may not serve a purpose in a development environment, in which case they can
+easily be set to `false`.
 
 ## wartremover
 
@@ -46,4 +51,8 @@ Add the following to `build.sbt`:
 
 #### Usage
 
-Just use `sbt` normally, the `run` command will trigger __wartremover__ if the build succeeds.
+Just use `sbt` normally, the `run` command will trigger __wartremover__ if everything compiles.
+
+## Versions
+
+All versions current as of March, 2018.
