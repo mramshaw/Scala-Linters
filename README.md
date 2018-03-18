@@ -31,7 +31,8 @@ Add the following to `build.sbt`:
 #### Verify Setup
 
 To verify the installation, check that `scalacOptions` and `libraryDependencies` contain the values below.
-[Note that these caommand must be typed INSIDE  sbt .]
+
+[Note that these commands must be typed INSIDE `sbt`.]
 
     > show scalacOptions
     [info] * -Yrangepos                   // required
@@ -93,7 +94,7 @@ Add the following to `project/plugins.sbt`:
 
     addSbtPlugin("org.wartremover" % "sbt-wartremover" % "2.2.1")
 
-Add the following to `build.sbt`:
+Add the following to `build.sbt` (at the end seems to work):
 
     wartremoverErrors ++= Warts.unsafe
 
