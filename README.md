@@ -2,6 +2,48 @@
 
 Some notes on installing ___code linters___ for Scala.
 
+[The following are in alphabetical order.]
+
+1. [scalafix](#scalafix)
+2. [scalastyle](#scalastyle)
+3. [wartremover](#wartremover)
+
+[I had good success with `scalastyle` and `wartremover` but could not get `scalafix` to work.]
+
+## scalafix
+
+Instructions copied from:
+
+    https://scalacenter.github.io/scalafix/docs/users/installation
+
+#### Setup
+
+Add the following to `project/plugins.sbt`:
+
+    addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.5.10")
+
+Add the following to `build.sbt`:
+
+    // These settings must appear after scalacOptions and libraryDependencies.
+    scalafixSettings
+    scalafixConfigure(Compile, Test, IntegrationTest)
+
+#### Verify Setup
+
+To verify the installation, check that `scalacOptions` and `libraryDependencies` contain the values below.
+[Note that these caommand must be typed INSIDE  sbt .]
+
+    > show scalacOptions
+    [info] * -Yrangepos                   // required
+    [info] * -Xplugin-require:semanticdb  // recommended
+    [info] * -P:semanticdb:sourceroot:/x  // recommended
+    > show libraryDependencies
+    [info] * org.scalameta:semanticdb-scalac:2.1.7:plugin->default(compile)
+
+#### Usage
+
+Just use `sbt` normally, the `run` command will trigger __scalafix__ if everything compiles.
+
 ## scalastyle
 
 Instructions copied from:
@@ -23,12 +65,18 @@ command (at the command line, NOT inside `sbt`):
 
 This will create a `scalastyle-config.xml` in the current directory, with the default settings.
 
-Then you can check your code with the `scalastyle` command (at the command line, NOT inside `sbt`):
+Then you can check your code with the `scalastyle` command.
+
+At the command line:
 
     $ sbt scalastyle
 
-This produces a list of errors on the console, as well as an XML result file
-`target/scalastyle-result.xml` (CheckStyle compatible format).
+Or inside `sbt`:
+
+    > scalastyle
+
+This produces a list of errors - broken down by source file - on the console, as well as an
+XML result file `target/scalastyle-result.xml` (CheckStyle compatible format).
 
 Some of the warnings may not serve a purpose in a development environment, in which case they can
 easily be set to `false`.
@@ -56,3 +104,7 @@ Just use `sbt` normally, the `run` command will trigger __wartremover__ if every
 ## Versions
 
 All versions current as of March, 2018.
+
+## To Do
+
+- [ ] Investigate why `scalastyle` generates stack traces
