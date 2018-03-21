@@ -1,12 +1,13 @@
 # Scala Linters
 
-Some notes on installing ___code linters___ for Scala.
+Some notes on installing a ___formatter___ and ___code linters___ for Scala.
 
 [The following are in alphabetical order.]
 
 1. [scalafix](#scalafix)
-2. [scalastyle](#scalastyle)
-3. [wartremover](#wartremover)
+2. [scalafmt](#scalafmt)
+3. [scalastyle](#scalastyle)
+4. [wartremover](#wartremover)
 
 [I had good success with `scalastyle` and `wartremover` but could not get `scalafix` to work.]
 
@@ -44,6 +45,35 @@ To verify the installation, check that `scalacOptions` and `libraryDependencies`
 #### Usage
 
 Just use `sbt` normally, the `run` command will trigger __scalafix__ if everything compiles.
+
+## scalafmt
+
+[This is a ___formatter___ rather than a ___linter___, but still useful.]
+
+Instructions copied from:
+
+    http://scalameta.org/scalafmt/#sbt-scalafmt
+
+#### Setup
+
+Add the following to `project/plugins.sbt`:
+
+    addSbtPlugin("com.geirsson" % "sbt-scalafmt" % "1.4.0")
+
+#### Usage
+
+Creating a configuration file is optional (the defaults seem fine).
+
+At the command line:
+
+    $ sbt scalafmt
+
+Once it completes it will report on the number of files reformatted:
+
+    ...
+    [info] Reformatted 3 Scala sources
+    [success] Total time: 1 s, completed 20-Mar-2018 5:37:27 PM
+    $
 
 ## scalastyle
 
@@ -108,4 +138,5 @@ All versions current as of March, 2018.
 
 ## To Do
 
+- [x] Add a formatter 
 - [ ] Investigate why `scalastyle` generates stack traces
